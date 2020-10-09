@@ -4,7 +4,6 @@ import React from "react";
 import {IconButton, Toolbar, Typography} from "@material-ui/core";
 import Link from "next/link";
 
-
 const UserModule = (props: PropsTypeUserModule) => {
     return (
         <AppBar className={style.module} position={"static"}>
@@ -19,10 +18,7 @@ const UserModule = (props: PropsTypeUserModule) => {
                     <IconButton className={style.container_button} color={"primary"}
                                 aria-label={"upload picture"} component={"span"}>
                         <Link href={props.href}>
-                            <a>
-                                <span className={style.button_text}>{props.text}</span>
-                                {props.children}
-                            </a>
+                            <a><span className={style.button_text}>{props.text}</span>{props.children}</a>
                         </Link>
                     </IconButton>
                 </div>

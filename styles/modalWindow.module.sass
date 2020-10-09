@@ -1,0 +1,54 @@
+.modal
+  width: 600px
+  height: 318px
+  background: #FFFFFF
+  border-radius: 10px
+  position: relative
+  z-index: 999
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -108%)
+  display: flex
+  flex-direction: column
+  align-items: center
+  transition: all .2s ease-in-out
+  .closeDiv
+    display: none
+    @media screen and (max-width: 840px)
+      display: block
+  @media screen and (max-width: 840px)
+    width: 100vw
+    border-radius: 10px 10px 0 0
+    height: 426px
+    position: absolute
+    bottom: 0
+    left: 0
+    transform: translate(0, -33%)
+  .modal_text
+    font-weight: 600
+    font-size: 24px
+    line-height: 33px
+    margin: 69px 0 32px
+    @media screen and (max-width: 840px)
+      font-size: 18px
+      line-height: 25px
+  .modal_text.second
+    margin: 84px 0 42px
+    @media screen and (max-width: 840px)
+      margin: 29px 0 0
+  .modal_close
+    color: grey
+    width: 14px
+    position: absolute
+    top: 29px
+    right: 29px
+.modal.success
+  @media screen and (max-width: 840px)
+    transform: translate(0, 43%)
+  .closeDiv
+    position: absolute
+    top: 0
+    left: 0
+    transform: translateY(-100%)
+    width: 100vh
+    height: 100vh
