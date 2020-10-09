@@ -1,0 +1,71 @@
+.userInformation
+  min-height: 192px
+  margin-top: 24px
+  background: #FFFFFF
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15)
+  border-radius: 10px
+  @media screen and (max-width: 840px)
+    margin-top: 10px
+    min-height: 126px
+  .inputs>form
+    display: flex
+    flex-direction: column
+    align-items: center
+  .item
+    display: flex
+    align-items: center
+    height: 96px
+    border-bottom: 1px solid #CAE7FE
+    @media screen and (max-width: 840px)
+      height: 64px
+    &:last-child
+      border-bottom: 0
+    .item_image
+      margin: 0 42px 0 74px
+      @media screen and (max-width: 840px)
+        margin: 0 10px
+        width: 20px
+    .item_text
+      color: #313131
+      font-weight: normal
+      font-size: 18px
+      line-height: 25px
+      font-family: Open Sans, sans-serif
+      @media screen and (max-width: 840px)
+        font-size: 14px
+        line-height: 19px
+  .container
+    display: flex
+    justify-content: space-around
+    align-items: center
+    padding: 50px 0 23px
+    @media screen and (max-width: 768px)
+      flex-direction: column
+      padding: 26px 0 6px
+    .input
+      position: relative
+      display: flex
+      align-items: flex-start
+      height: 77px
+      padding-right: 77px
+      &:last-child
+        .line
+          display: none
+      @media screen and (max-width: 768px)
+        padding-right: 0
+        height: 86px
+      .container_icon
+        position: relative
+        top: 26px
+        transform: translateY(-50%)
+        margin: 0 42px 0 30px
+        @media screen and (max-width: 768px)
+          display: none
+      .container_input
+        width: 254px
+      .line
+        position: absolute
+        right: 0
+        bottom: 0
+        @media screen and (max-width: 768px)
+          display: none

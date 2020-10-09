@@ -1,0 +1,19 @@
+.app
+  position: relative
+  padding: 20px 24px
+  min-height: 100vh
+  background-image: url('../public/image-fon.svg')
+  background-size: contain
+  background-repeat: no-repeat
+  @media screen and (max-width: 768px)
+    background-image: url('../public/image-fon-mobile.svg')
+    padding: 17px 10px
+    overflow: hidden
+  .fon
+    background-color: rgba(0, 0, 0, 0.2)
+    position: absolute
+    top: 0
+    left: 0
+    right: 0
+    bottom: 0
+    z-index: 500

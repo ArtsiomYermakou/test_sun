@@ -1,0 +1,27 @@
+.header
+  display: flex
+  justify-content: flex-end
+  align-items: center
+
+  .header_notifications, .header_line, .header_avatar, .header_text
+    margin-right: 20px
+    color: white
+    @media screen and (max-width: 840px)
+      margin-right: 10px
+
+  .header_notifications
+    @media screen and (max-width: 840px)
+      width: 16px
+
+  .header_line, .header_avatar
+    @media screen and (max-width: 840px)
+      height: 24px
+
+  .header_avatar
+    border-radius: 50%
+    @media screen and (max-width: 840px)
+      margin-right: 0
+
+  .header_text
+    @media screen and (max-width: 840px)
+      display: none
