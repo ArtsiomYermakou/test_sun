@@ -14,7 +14,7 @@ const MyApp = ({Component, pageProps}: AppProps) => {
                     content="minimum-scale=1, initial-scale=1, width=device-width"
                 />
                 <link rel="icon" href="faviconka.ico" type="image/x-icon" />
-                <title>TESTTESTTESTTESTTESTTEST</title>
+                <title>Error 404</title>
             </Head>
             <Component {...pageProps} />
         </>

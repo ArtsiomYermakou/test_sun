@@ -24,6 +24,7 @@ const Home = () => {
         <div className={style.app}>
             <Head>
                 <title>Home</title>
+                <meta name={"keywords"} content={"SEO words"}/>
             </Head>
             <Header name={values.name}/>
             <Title title={"Личный профиль"} description={"Главная/Личный профиль"}/>

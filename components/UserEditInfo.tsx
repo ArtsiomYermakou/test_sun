@@ -5,7 +5,6 @@ import style from "../styles/userInfo.module.sass"
 import axios from "axios"
 import {makeStyles} from "@material-ui/styles";
 import {Button} from "@material-ui/core";
-import {ValidateEmail, ValidateName, ValidatePhone} from "./validate";
 import Input from "./Input";
 
 const instance = axios.create({
@@ -54,37 +53,60 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
                 props.setModalIsOpen(true)
                 return console.log(res)
             })
-            .catch(res => {
-                console.log(res)
+            .catch(error => {
+                console.log(error)
             })
 
     }
 
+    // const validate = (values: ValuesType) => {
+    //     const errors: any = {}
+    //
+    //     if (!ValidateName(values.name)) return {name: 'Вы неверно указали фамилию и имя'}
+    //     if (values.name === '') return {name: 'Введите фамилию и имя'}
+    //     if (!ValidateEmail(values.email)) return {email: 'Вы неверно указали email'}
+    //     if (values.email === '') return {email: 'Введите ваш email'}
+    //     if (!ValidatePhone(values.phone)) return {phone: 'Вы неверно указали номер телефона'}
+    //     if (values.phone === '') return {phone: 'Введите номер телефона'}
+    //
+    //     if (!values.name) {
+    //         return errors.name = "Введите фамилию и имя";
+    //     } else if (values.name.length < 3) {
+    //         errors.name = 'Must be 3 characters or less';
+    //     }
+    //     if (!ValidateEmail(values.email)) {
+    //         return {email: 'Вы неверно указали email'}
+    //     }
+    //     if (values.email === '') {
+    //         return {email: 'Введите ваш email'}
+    //     }
+    //
+    //     return errors
+    //
+    // }
+
     const validate = (values: ValuesType) => {
-        const errors: any = {}
-
-        if (!ValidateName(values.name)) return {name: 'Вы неверно указали фамилию и имя'}
-        if (values.name === '') return {name: 'Введите фамилию и имя'}
-        if (!ValidateEmail(values.email)) return {email: 'Вы неверно указали email'}
-        if (values.email === '') return {email: 'Введите ваш email'}
-        if (!ValidatePhone(values.phone)) return {phone: 'Вы неверно указали номер телефона'}
-        if (values.phone === '') return {phone: 'Введите номер телефона'}
-
+        const errors: any = {};
         if (!values.name) {
-            return errors.name = "Введите фамилию и имя";
-        } else if (values.name.length < 3) {
-            errors.name = 'Must be 3 characters or less';
-        }
-        if (!ValidateEmail(values.email)) {
-            return {email: 'Вы неверно указали email'}
-        }
-        if (values.email === '') {
-            return {email: 'Введите ваш email'}
+            errors.name = 'Required';
+        } else if (values.name.length > 15) {
+            errors.firstName = 'Must be 15 characters or less';
         }
 
-        return errors
+        if (!values.email) {
+            errors.email = 'Required';
+        } else if (values.email.length > 20) {
+            errors.email = 'Must be 20 characters or less';
+        }
 
-    }
+        if (!values.phone) {
+            errors.phone = 'Required';
+        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.phone)) {
+            errors.phone = 'Invalid email address';
+        }
+
+        return errors;
+    };
 
     const formik = useFormik({
         initialValues,
@@ -101,6 +123,7 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
                       value={initialValues}
                       formik={formik.getFieldProps(`${props.name}`)}/>
     }
+    // {formik.errors[name] ? <div>{formik.errors[name]}</div> : null}
 
     return (
         <div className={style.userInformation}>
