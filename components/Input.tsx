@@ -4,7 +4,6 @@ import {ValuesType} from "../state/state";
 import React from "react";
 
 const Input = (props: InputPropsType) => {
-
     return (
         <div className={style.input}>
             <img className={props.className} src={props.img} alt={"logo"}/>
@@ -16,7 +15,6 @@ const Input = (props: InputPropsType) => {
                        defaultValue={props.value}
                        error={props.error}
                        {...props.formik} />
-
             <img className={style.line} src={"./Line-12.svg"} alt="line"/>
         </div>
     )

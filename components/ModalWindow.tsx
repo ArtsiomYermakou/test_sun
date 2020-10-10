@@ -57,6 +57,7 @@ const useStyles = makeStyles({
 const ModalWindow = (props: ModalPropsType) => {
 
     const classes = useStyles()
+
     const [save, setSave] = useState<boolean>(false);
     const [text, setText] = useState('')
 
@@ -76,26 +77,18 @@ const ModalWindow = (props: ModalPropsType) => {
 
     const unSave = () => props.setModalIsOpen(false)
 
-    const closeModal = () => {
-        props.setModalIsOpen(false)
-    }
+    const closeModal = () => props.setModalIsOpen(false)
+
 
     return (
         <div className={`${style.modal} ${save ? style.success : ""}`}>
-            {
-                !save ? (
+            {!save ? (
                     <>
                         <span className={style.modal_text}>Сохранить изменения?</span>
-                        <Button classes={{
-                            label: classes.label,
-                            root: classes.save
-                        }} onClick={SaveData} variant={"contained"} color={'primary'} disableRipple={true}>
+                        <Button classes={{label: classes.label, root: classes.save}} onClick={SaveData} variant={"contained"} color={'primary'} disableRipple={true}>
                             Сохранить
                         </Button>
-                        <Button onClick={closeModal} classes={{
-                            label: classes.label,
-                            root: classes.unSave
-                        }} variant={"outlined"} color={"primary"} disableRipple={true}>
+                        <Button onClick={closeModal} classes={{label: classes.label, root: classes.unSave}} variant={"outlined"} color={"primary"} disableRipple={true}>
                             Не сохранять
                         </Button>
                         <img className={style.modal_close} onClick={unSave} src={"./close-modal.svg"} alt={"close"}/>

@@ -1,6 +1,5 @@
 import axios from "axios"
 
-
 const instance = axios.create({
     baseURL: `http://jsonplaceholder.typicode.com/`,
     headers: {"Content-Type": "application/json", "x-token-access": "random"}

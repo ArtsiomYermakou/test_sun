@@ -6,6 +6,7 @@ import axios from "axios"
 import {makeStyles} from "@material-ui/styles";
 import {Button} from "@material-ui/core";
 import Input from "./Input";
+import {ValidateEmail, ValidateName, ValidatePhone} from "./validate";
 
 const instance = axios.create({
     baseURL: `/api/posts`,
@@ -41,7 +42,7 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
         phone: "",
     }
 
-    const onSubmit = (values: any, a: any) => {
+    const onSubmit = (values: ValuesType, a: any) => {
         instance.post("", values)
             .then(res => {
                 props.setValues({
@@ -56,57 +57,21 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
             .catch(error => {
                 console.log(error)
             })
-
     }
 
-    // const validate = (values: ValuesType) => {
-    //     const errors: any = {}
-    //
-    //     if (!ValidateName(values.name)) return {name: 'Вы неверно указали фамилию и имя'}
-    //     if (values.name === '') return {name: 'Введите фамилию и имя'}
-    //     if (!ValidateEmail(values.email)) return {email: 'Вы неверно указали email'}
-    //     if (values.email === '') return {email: 'Введите ваш email'}
-    //     if (!ValidatePhone(values.phone)) return {phone: 'Вы неверно указали номер телефона'}
-    //     if (values.phone === '') return {phone: 'Введите номер телефона'}
-    //
-    //     if (!values.name) {
-    //         return errors.name = "Введите фамилию и имя";
-    //     } else if (values.name.length < 3) {
-    //         errors.name = 'Must be 3 characters or less';
-    //     }
-    //     if (!ValidateEmail(values.email)) {
-    //         return {email: 'Вы неверно указали email'}
-    //     }
-    //     if (values.email === '') {
-    //         return {email: 'Введите ваш email'}
-    //     }
-    //
-    //     return errors
-    //
-    // }
+    const validate = (values: ValuesType): { name?: string, email?: string, phone?: string } => {
+        const errors = {}
 
-    const validate = (values: ValuesType) => {
-        const errors: any = {};
-        if (!values.name) {
-            errors.name = 'Required';
-        } else if (values.name.length > 15) {
-            errors.firstName = 'Must be 15 characters or less';
-        }
-
-        if (!values.email) {
-            errors.email = 'Required';
-        } else if (values.email.length > 20) {
-            errors.email = 'Must be 20 characters or less';
-        }
-
-        if (!values.phone) {
-            errors.phone = 'Required';
-        } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.phone)) {
-            errors.phone = 'Invalid email address';
-        }
-
-        return errors;
-    };
+        if (values.name === "") return {name: "Введите фамилию и имя"}
+        if (!ValidateName(values.name)) return {name: "Вы неверно указали фамилию и имя"}
+        if (values.email === '') return {email: 'Введите ваш email'}
+        if (!ValidateEmail(values.email)) return {email: 'Вы неверно указали email'}
+        if (values.phone === '') return {phone: 'Введите номер телефона'}
+        if (!ValidatePhone(values.phone)) return {phone: 'Вы неверно указали номер телефона'}
+        if (values.phone.length > 13) return {phone: "Номер не может быть длиннее 13 символов"} //Пример
+        if (values.phone.length < 7) return {phone: "Номер не может быть короче 7 символов"} //Пример
+        return errors
+    }
 
     const formik = useFormik({
         initialValues,
@@ -115,15 +80,15 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
     })
 
     const renderInput = (props: RenderInputPropsType) => {
+        const error = formik.errors[props.name] ? formik.errors[props.name] : ""
         return <Input img={props.img} className={style.container_icon} classNameInput={style.container_input}
-                      error={formik.errors.name ? formik.errors.name : ""}
+                      error={error ? error : ""}
                       label={props.label}
                       placeholder={props.placeholder}
-                      message={formik.errors.name ? formik.errors.name : ""}
+                      message={error ? error : ""}
                       value={initialValues}
                       formik={formik.getFieldProps(`${props.name}`)}/>
     }
-    // {formik.errors[name] ? <div>{formik.errors[name]}</div> : null}
 
     return (
         <div className={style.userInformation}>
@@ -150,8 +115,7 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
                         })}
                     </div>
                     <Button
-                        // disabled={!formik.errors.phone}
-                        // disabled={!formik.errors.phone || formik.errors.email || formik.errors.name}
+                        disabled={!!(formik.errors.phone || formik.errors.email || formik.errors.name)}
                         type={"submit"} classes={{root: classes.root}} variant={"contained"} color={"primary"}
                         disableRipple={true}>
                         Сохранить изменения
@@ -164,10 +128,9 @@ const UserEditInfo = (props: UserEditInfoPropsType) => {
 
 export default UserEditInfo;
 
-
 type RenderInputPropsType = {
     img: string
-    name: string
+    name: "phone" | "name" | "email"
     label: string
     placeholder: string
 }
@@ -176,21 +139,3 @@ type UserEditInfoPropsType = {
     setValues: (values: ValuesType) => void
     setModalIsOpen: (state: boolean) => void
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

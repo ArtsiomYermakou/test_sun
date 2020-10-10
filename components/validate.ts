@@ -1,5 +1,5 @@
 export let ValidateName = (name: string) => {
-    const nameReg = /^[А-Яа-яЁё]{4,}\s[А-Яа-яЁё]{4,}/g
+    const nameReg = /^[А-ЯЁA-Z][а-яёa-z]{2,}\s[А-ЯЁA-Z][а-яёa-z]{2,}/g
     return nameReg.test(name)
 }
 

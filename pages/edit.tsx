@@ -10,7 +10,6 @@ import UserEditInfo from "../components/UserEditInfo";
 import ModalWindow from "../components/ModalWindow";
 import {repository} from "../localStorage";
 
-
 const Home = () => {
 
     const [modalIsOpen, setModalIsOpen] = useState<boolean>(false)
@@ -33,13 +32,12 @@ const Home = () => {
             <UserModule name={values.name} href={"/"} text={"Закрыть"}>
                 <Close/>
             </UserModule>
-            <UserEditInfo setModalIsOpen={setModalIsOpen} setValues={setValues} />
-            {
-                modalIsOpen
-                    ? <>
-                        <ModalWindow values={values} setModalIsOpen={setModalIsOpen}/>
-                        <div className={style.fon}/>
-                    </> : <></>
+            <UserEditInfo setModalIsOpen={setModalIsOpen} setValues={setValues}/>
+            {modalIsOpen
+                ? <>
+                    <ModalWindow values={values} setModalIsOpen={setModalIsOpen}/>
+                    <div className={style.fon}/>
+                </> : <></>
             }
         </div>
     )
